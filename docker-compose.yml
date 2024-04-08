@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  translate-api:
+    image: translate-api
+    build: .
+    ports:
+      - "8080:8080"

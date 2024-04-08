@@ -6,17 +6,18 @@ import (
 	"net/http"
 )
 
-func RobotsHandler(c *gin.Context) {
-	// Disallow all robots
-	c.String(http.StatusOK, "User-agent: *\nDisallow: /")
-}
-
 func Handler(c *gin.Context) {
 	url := "https://translate.googleapis.com"
 
 	path := c.Param("path")
+
+	if path == "/robots.txt" {
+		// block robots
+		c.String(http.StatusOK, "User-agent: *\nDisallow: /")
+		return
+	}
+
 	params := c.Request.URL.Query()
-	println("path:", path)
 
 	// create a new request
 	req, err := http.NewRequest(c.Request.Method, url+path, c.Request.Body)

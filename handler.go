@@ -6,6 +6,11 @@ import (
 	"net/http"
 )
 
+func RobotsHandler(c *gin.Context) {
+	// Disallow all robots
+	c.String(http.StatusOK, "User-agent: *\nDisallow: /")
+}
+
 func Handler(c *gin.Context) {
 	url := "https://translate.googleapis.com"
 
